@@ -1,14 +1,16 @@
 /* Variáveis */
 :root {
-    --primary-color: #ff4d4d;
-    --secondary-color: #333;
-    --success-color: #28a745;
-    --warning-color: #ffc107;
-    --danger-color: #dc3545;
-    --info-color: #17a2b8;
+    --primary-color: #D72638;      /* Vermelho pizzaria */
+    --secondary-color: #1A1A1A;    /* Preto carvão */
+    --accent-color: #3F784C;       /* Verde manjericão */
+    --background-color: #F5E6CA;   /* Bege massa */
+    --white: #FFFFFF;              /* Branco cremoso */
+    --success-color: #3F784C;      /* Verde manjericão */
+    --warning-color: #D72638;      /* Vermelho pizzaria */
+    --danger-color: #D72638;       /* Vermelho pizzaria */
+    --info-color: #3F784C;         /* Verde manjericão */
     --light-gray: #f8f9fa;
     --dark-gray: #343a40;
-    --white: #fff;
 }
 
 /* Reset e Estilos Globais */
@@ -22,7 +24,7 @@ body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
     color: var(--secondary-color);
-    background-color: var(--light-gray);
+    background-color: var(--background-color);
 }
 
 .container {
@@ -33,8 +35,8 @@ body {
 
 /* Header */
 .header {
-    background-color: var(--white);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: var(--secondary-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -50,7 +52,7 @@ body {
 }
 
 .logo h1 {
-    color: var(--primary-color);
+    color: var(--white);
     font-size: 1.8rem;
 }
 
@@ -61,23 +63,23 @@ body {
 }
 
 .nav-links a {
-    color: var(--secondary-color);
+    color: var(--white);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
-    color: var(--primary-color);
+    color: var(--background-color);
 }
 
 /* Menu de Categorias */
 .categorias-nav {
-    background-color: var(--white);
+    background-color: var(--secondary-color);
     padding: 1rem 0;
     margin-bottom: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .categorias-nav ul {
@@ -90,7 +92,7 @@ body {
 }
 
 .categorias-nav a {
-    color: var(--secondary-color);
+    color: var(--white);
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 20px;
@@ -121,6 +123,8 @@ body {
     margin-bottom: 1.5rem;
     color: var(--primary-color);
     font-size: 1.5rem;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
 }
 
 .produtos-lista {
@@ -133,12 +137,15 @@ body {
     background-color: var(--white);
     border-radius: 8px;
     overflow: hidden;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid var(--accent-color);
 }
 
 .produto-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    border-color: var(--primary-color);
 }
 
 .produto-imagem {
@@ -148,16 +155,17 @@ body {
 }
 
 .produto-info {
-    padding: 1rem;
+    padding: 1.5rem;
 }
 
 .produto-info h3 {
     margin-bottom: 0.5rem;
     font-size: 1.2rem;
+    color: var(--secondary-color);
 }
 
 .produto-descricao {
-    color: #666;
+    color: var(--secondary-color);
     margin-bottom: 1rem;
     font-size: 0.9rem;
     height: 3em;
@@ -177,7 +185,7 @@ body {
 .btn-adicionar {
     width: 100%;
     padding: 0.75rem;
-    background-color: var(--primary-color);
+    background-color: var(--accent-color);
     color: var(--white);
     border: none;
     border-radius: 4px;
@@ -187,11 +195,12 @@ body {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .btn-adicionar:hover {
-    background-color: #ff3333;
+    background-color: var(--primary-color);
+    transform: scale(1.02);
 }
 
 /* Mensagens Flutuantes */
@@ -311,8 +320,9 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: var(--light-gray);
+    background-color: var(--background-color);
     border-radius: 8px;
+    border: 1px solid var(--accent-color);
 }
 
 .item-info {
@@ -355,14 +365,14 @@ body {
     width: 50px;
     text-align: center;
     padding: 0.25rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--accent-color);
     border-radius: 4px;
 }
 
 .btn-remover {
     background: none;
     border: none;
-    color: var(--danger-color);
+    color: var(--primary-color);
     cursor: pointer;
     font-size: 1.2rem;
 }
@@ -419,7 +429,7 @@ body {
 }
 
 .btn-continuar {
-    background-color: var(--secondary-color);
+    background-color: var(--accent-color);
     color: var(--white);
 }
 
@@ -476,7 +486,7 @@ body {
 .form-group textarea {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--accent-color);
     border-radius: 4px;
     font-size: 1rem;
 }
@@ -599,11 +609,12 @@ body {
     border-radius: 20px;
     font-weight: 600;
     font-size: 0.9rem;
+    background-color: var(--accent-color);
+    color: var(--white);
 }
 
 .pedido-status.pendente {
-    background-color: var(--warning-color);
-    color: #856404;
+    background-color: var(--primary-color);
 }
 
 .pedido-status.confirmado {
@@ -622,8 +633,7 @@ body {
 }
 
 .pedido-status.entregue {
-    background-color: var(--success-color);
-    color: var(--white);
+    background-color: var(--accent-color);
 }
 
 .pedido-status.cancelado {
@@ -695,52 +705,51 @@ body {
 }
 
 .alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+    background-color: var(--accent-color);
+    color: var(--white);
 }
 
 .alert-error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+    background-color: var(--primary-color);
+    color: var(--white);
 }
 
 .alert-warning {
-    background-color: #fff3cd;
-    color: #856404;
-    border: 1px solid #ffeeba;
+    background-color: var(--primary-color);
+    color: var(--white);
 }
 
 /* Footer */
 .footer {
-    background-color: var(--dark-gray);
+    background-color: var(--secondary-color);
     color: var(--white);
-    padding: 3rem 0 1.5rem;
+    padding: 3rem 0 1rem;
     margin-top: 4rem;
 }
 
 .footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
 .footer-info h3 {
-    color: var(--primary-color);
+    color: var(--background-color);
     margin-bottom: 1rem;
+    font-size: 1.2rem;
 }
 
 .footer-info p {
-    margin-bottom: 0.5rem;
+    color: var(--background-color);
 }
 
 .social-links {
     display: flex;
     gap: 1rem;
+    margin-top: 1rem;
 }
 
 .social-links a {
@@ -750,14 +759,15 @@ body {
 }
 
 .social-links a:hover {
-    color: var(--primary-color);
+    color: var(--background-color);
 }
 
 .footer-bottom {
     text-align: center;
+    padding-top: 2rem;
     margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid var(--background-color);
+    color: var(--background-color);
 }
 
 /* Responsividade */
@@ -987,7 +997,7 @@ body {
 .auth-form input {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--accent-color);
     border-radius: 4px;
     font-size: 1rem;
 }
