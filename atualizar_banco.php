@@ -3,14 +3,16 @@ require_once 'includes/config.php';
 
 // Array com os nomes das imagens para cada produto
 $imagens = [
-    'Pizza Margherita' => 'pizza-margherita.jpg',
-    'Pizza Calabresa' => 'pizza-calabresa.jpg',
+    'Pizza Margherita' => 'pizza-marguerita.jpg',
+    'Pizza Calabresa' => 'calabresa.webp',
     'Pizza Portuguesa' => 'pizza-portuguesa.jpg',
-    'Pizza 4 Queijos' => 'pizza-4-queijos.jpg',
-    'Pizza Frango com Catupiry' => 'pizza-frango-catupiry.jpg',
-    'Pizza de Chocolate' => 'pizza-chocolate.jpg',
-    'Pizza de Banana' => 'pizza-banana.jpg',
-    'Suco de Laranja' => 'suco-laranja.jpg'
+    'Pizza 4 Queijos' => 'Pizza-Quatro-Queijos.jpg',
+    'Pizza Frango com Catupiry' => 'frango-com-catupiry.jpg',
+    'Pizza de Chocolate' => 'Pizza-de-chocolate-com-confete.jpg',
+    'Pizza de Banana' => 'pizza-doce-banana-receita.webp',
+    'Suco de Laranja' => 'suco-laranja.jpeg',
+    'Guaraná' => 'guarana-2l.jpg',
+    'Coca-Cola' => 'coca-cola-2l.jpg'
 ];
 
 try {
