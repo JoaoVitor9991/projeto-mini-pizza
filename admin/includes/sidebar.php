@@ -35,30 +35,6 @@
                     <span>Categorias</span>
                 </a>
             </li>
-            
-            <li>
-                <a href="<?php echo SITE_URL; ?>/admin/usuarios/listar.php" class="<?php echo strpos($_SERVER['PHP_SELF'], 'usuarios') !== false ? 'active' : ''; ?>">
-                    <i class="fas fa-users"></i>
-                    <span>Usuários</span>
-                </a>
-            </li>
-            
-            <li>
-                <a href="<?php echo SITE_URL; ?>/admin/contatos/listar.php" class="<?php echo strpos($_SERVER['PHP_SELF'], 'contatos') !== false ? 'active' : ''; ?>">
-                    <i class="fas fa-envelope"></i>
-                    <span>Mensagens</span>
-                    <?php if (isset($mensagens_novas) && $mensagens_novas > 0): ?>
-                        <span class="badge"><?php echo $mensagens_novas; ?></span>
-                    <?php endif; ?>
-                </a>
-            </li>
-            
-            <li>
-                <a href="<?php echo SITE_URL; ?>/admin/configuracoes.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'configuracoes.php' ? 'active' : ''; ?>">
-                    <i class="fas fa-cog"></i>
-                    <span>Configurações</span>
-                </a>
-            </li>
         </ul>
     </nav>
     

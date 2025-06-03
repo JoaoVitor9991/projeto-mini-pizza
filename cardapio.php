@@ -34,7 +34,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo SITE_NAME; ?> - Cardápio</title>
+    <title>Cardápio - <?php echo SITE_NAME; ?></title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -44,17 +44,10 @@ try {
 
     <!-- Conteúdo Principal -->
     <main class="container">
+        <h1>Nosso Cardápio</h1>
+        
         <?php if (isset($erro)): ?>
             <div class="alert alert-error"><?php echo $erro; ?></div>
-        <?php endif; ?>
-
-        <?php if (isset($_SESSION['mensagem'])): ?>
-            <div class="alert alert-<?php echo $_SESSION['mensagem']['tipo']; ?>">
-                <?php 
-                echo $_SESSION['mensagem']['texto'];
-                unset($_SESSION['mensagem']);
-                ?>
-            </div>
         <?php endif; ?>
 
         <!-- Menu de Categorias -->

@@ -1,0 +1,50 @@
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de IDE/Editor
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Arquivos de dependências
+/vendor/
+/node_modules/
+composer.lock
+package-lock.json
+
+# Arquivos de ambiente
+.env
+.env.local
+.env.*.local
+
+# Arquivos de cache
+*.cache
+*.log
+
+# Arquivos de upload
+/uploads/*
+!/uploads/.gitkeep
+/uploads/produtos/*
+!/uploads/produtos/.gitkeep
+
+# Arquivos de configuração local
+config.local.php
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Arquivos de backup
+*.bak
+*.backup
+*.old
+
+# Outros
+/logs/
+/temp/
+/tmp/ 

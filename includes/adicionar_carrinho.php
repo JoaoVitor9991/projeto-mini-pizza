@@ -1,67 +1,46 @@
 <?php
 require_once 'config.php';
 
-// Verificar se o usuário está logado
-if (!isset($_SESSION['usuario_id'])) {
-    header('Content-Type: application/json');
-    echo json_encode([
-        'status' => 'error',
-        'mensagem' => 'Você precisa estar logado para adicionar produtos ao carrinho.'
-    ]);
+// Verificar se é uma requisição POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['status' => 'error', 'mensagem' => 'Método não permitido']);
     exit;
 }
 
-// Receber e decodificar os dados JSON
-$dados = json_decode(file_get_contents('php://input'), true);
+// Obter dados da requisição
+$json = file_get_contents('php://input');
+$dados = json_decode($json, true);
 
 if (!isset($dados['produto_id']) || !is_numeric($dados['produto_id'])) {
-    header('Content-Type: application/json');
-    echo json_encode([
-        'status' => 'error',
-        'mensagem' => 'Produto inválido.'
-    ]);
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'mensagem' => 'ID do produto inválido']);
     exit;
 }
 
 $produto_id = (int) $dados['produto_id'];
+$quantidade = isset($dados['quantidade']) ? (int) $dados['quantidade'] : 1;
+
+if ($quantidade < 1) {
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'mensagem' => 'Quantidade inválida']);
+    exit;
+}
 
 try {
-    $pdo = conectarDB();
+    // Adicionar ao carrinho
+    adicionarAoCarrinho($produto_id, $quantidade);
     
-    // Verificar se o produto existe e está ativo
-    $stmt = $pdo->prepare("SELECT id, nome, preco FROM produtos WHERE id = ? AND ativo = 1");
-    $stmt->execute([$produto_id]);
-    $produto = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-    if (!$produto) {
-        throw new Exception('Produto não encontrado ou indisponível.');
-    }
-    
-    // Inicializar o carrinho se não existir
-    if (!isset($_SESSION['carrinho'])) {
-        $_SESSION['carrinho'] = [];
-    }
-    
-    // Adicionar ou atualizar produto no carrinho
-    if (isset($_SESSION['carrinho'][$produto_id])) {
-        $_SESSION['carrinho'][$produto_id]['quantidade']++;
-    } else {
-        $_SESSION['carrinho'][$produto_id] = [
-            'nome' => $produto['nome'],
-            'preco' => $produto['preco'],
-            'quantidade' => 1
-        ];
-    }
-    
-    header('Content-Type: application/json');
+    // Retornar resposta de sucesso
     echo json_encode([
         'status' => 'success',
-        'mensagem' => 'Produto adicionado ao carrinho com sucesso!',
-        'total_itens' => array_sum(array_column($_SESSION['carrinho'], 'quantidade'))
+        'mensagem' => 'Produto adicionado ao carrinho',
+        'total_itens' => contarItensCarrinho(),
+        'total_valor' => calcularTotalCarrinho()
     ]);
     
 } catch (Exception $e) {
-    header('Content-Type: application/json');
+    http_response_code(500);
     echo json_encode([
         'status' => 'error',
         'mensagem' => $e->getMessage()

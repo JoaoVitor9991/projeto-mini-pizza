@@ -63,6 +63,18 @@ CREATE TABLE IF NOT EXISTS contatos (
     status ENUM('novo', 'lido', 'respondido') DEFAULT 'novo'
 );
 
+-- Tabela de logs de pedidos
+CREATE TABLE IF NOT EXISTS logs_pedidos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pedido_id INT,
+    status_anterior VARCHAR(20) NOT NULL,
+    status_novo VARCHAR(20) NOT NULL,
+    usuario_id INT,
+    data_alteracao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
 -- Inserir usuário administrador padrão
 -- Senha: admin123 (hash)
 INSERT INTO usuarios (nome, email, senha, tipo) VALUES 

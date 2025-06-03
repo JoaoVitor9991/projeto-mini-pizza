@@ -62,7 +62,7 @@ try {
                     <i class="fas fa-clock"></i>
                     <div class="stats-info">
                         <h3>Pedidos Pendentes</h3>
-                        <p><?php echo $pedidos_pendentes; ?></p>
+                        <p><?php echo $pedidos_pendentes ?? 0; ?></p>
                     </div>
                 </div>
                 
@@ -70,7 +70,7 @@ try {
                     <i class="fas fa-shopping-bag"></i>
                     <div class="stats-info">
                         <h3>Pedidos Hoje</h3>
-                        <p><?php echo $pedidos_hoje; ?></p>
+                        <p><?php echo $pedidos_hoje ?? 0; ?></p>
                     </div>
                 </div>
                 
@@ -78,7 +78,7 @@ try {
                     <i class="fas fa-pizza-slice"></i>
                     <div class="stats-info">
                         <h3>Total de Produtos</h3>
-                        <p><?php echo $total_produtos; ?></p>
+                        <p><?php echo $total_produtos ?? 0; ?></p>
                     </div>
                 </div>
                 
@@ -86,7 +86,7 @@ try {
                     <i class="fas fa-envelope"></i>
                     <div class="stats-info">
                         <h3>Mensagens Novas</h3>
-                        <p><?php echo $mensagens_novas; ?></p>
+                        <p><?php echo $mensagens_novas ?? 0; ?></p>
                     </div>
                 </div>
             </div>
@@ -117,11 +117,12 @@ try {
                                     LIMIT 5
                                 ");
                                 while ($pedido = $stmt->fetch(PDO::FETCH_ASSOC)):
+                                    $valor_total = isset($pedido['valor_total']) ? $pedido['valor_total'] : 0;
                             ?>
                                 <tr>
                                     <td>#<?php echo $pedido['id']; ?></td>
                                     <td><?php echo htmlspecialchars($pedido['cliente']); ?></td>
-                                    <td>R$ <?php echo number_format($pedido['valor_total'], 2, ',', '.'); ?></td>
+                                    <td>R$ <?php echo number_format($valor_total, 2, ',', '.'); ?></td>
                                     <td>
                                         <span class="status-badge status-<?php echo $pedido['status']; ?>">
                                             <?php echo ucfirst($pedido['status']); ?>

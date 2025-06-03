@@ -87,4 +87,77 @@ function exibirMensagem() {
         return "<div class='alert alert-{$mensagem['tipo']}'>{$mensagem['texto']}</div>";
     }
     return '';
+}
+
+// Função para adicionar produto ao carrinho
+function adicionarAoCarrinho($produto_id, $quantidade = 1) {
+    try {
+        $pdo = conectarDB();
+        
+        // Buscar informações do produto
+        $stmt = $pdo->prepare("SELECT * FROM produtos WHERE id = ? AND ativo = 1");
+        $stmt->execute([$produto_id]);
+        $produto = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if (!$produto) {
+            throw new Exception('Produto não encontrado');
+        }
+        
+        // Inicializar carrinho se não existir
+        if (!isset($_SESSION['carrinho'])) {
+            $_SESSION['carrinho'] = [];
+        }
+        
+        // Verificar se o produto já está no carrinho
+        $produto_encontrado = false;
+        foreach ($_SESSION['carrinho'] as &$item) {
+            if ($item['id'] == $produto_id) {
+                $item['quantidade'] += $quantidade;
+                $produto_encontrado = true;
+                break;
+            }
+        }
+        
+        // Se o produto não estiver no carrinho, adiciona
+        if (!$produto_encontrado) {
+            $_SESSION['carrinho'][] = [
+                'id' => $produto['id'],
+                'nome' => $produto['nome'],
+                'preco' => $produto['preco'],
+                'quantidade' => $quantidade,
+                'imagem' => $produto['imagem']
+            ];
+        }
+        
+        return true;
+        
+    } catch (Exception $e) {
+        throw new Exception('Erro ao adicionar produto ao carrinho: ' . $e->getMessage());
+    }
+}
+
+// Função para contar itens no carrinho
+function contarItensCarrinho() {
+    if (!isset($_SESSION['carrinho'])) {
+        return 0;
+    }
+    
+    $total = 0;
+    foreach ($_SESSION['carrinho'] as $item) {
+        $total += $item['quantidade'];
+    }
+    return $total;
+}
+
+// Função para calcular total do carrinho
+function calcularTotalCarrinho() {
+    if (!isset($_SESSION['carrinho'])) {
+        return 0;
+    }
+    
+    $total = 0;
+    foreach ($_SESSION['carrinho'] as $item) {
+        $total += $item['preco'] * $item['quantidade'];
+    }
+    return $total;
 } 

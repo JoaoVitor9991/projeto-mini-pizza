@@ -106,7 +106,7 @@ if (isset($_SESSION['usuario_id'])) {
             </form>
             <div class="login-links">
                 <a href="recuperar_senha.php">Esqueceu a senha?</a> | 
-                <a href="cadastro.php">Criar conta</a><br>
+                <a href="registrar.php">Criar conta</a><br>
                 <a href="index.php">Voltar para a página inicial</a>
             </div>
         </div>

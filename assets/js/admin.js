@@ -73,7 +73,7 @@ function mascaraMoeda(campo) {
 
 // Atualizar status do pedido
 function atualizarStatusPedido(pedidoId, novoStatus) {
-    fetch('../includes/atualizar_status_pedido.php', {
+    fetch('../../admin/includes/atualizar_status_pedido.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -93,6 +93,8 @@ function atualizarStatusPedido(pedidoId, novoStatus) {
                 statusBadge.textContent = novoStatus.charAt(0).toUpperCase() + novoStatus.slice(1).replace('_', ' ');
             }
             alert('Status atualizado com sucesso!');
+            // Recarregar a página para atualizar todas as informações
+            window.location.reload();
         } else {
             alert(data.mensagem);
         }
