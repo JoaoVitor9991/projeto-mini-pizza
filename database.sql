@@ -80,14 +80,14 @@ CREATE TABLE logs (
 
 -- Inserir usuário admin padrão (senha: admin123)
 INSERT INTO usuarios (nome, email, senha, tipo) VALUES 
-('Administrador', 'admin@minipizza.com', '$2y$10$8tDjcgyZ9WcyVg5Qb.AKVOdqvZe3QvPGJO3PB7HF8IWfNmtKjKhPi', 'admin');
+('Administrador', 'admin@pizzariaamatsu.com', '$2y$10$8tDjcgyZ9WcyVg5Qb.AKVOdqvZe3QvPGJO3PB7HF8IWfNmtKjKhPi', 'admin');
 
 -- Inserir algumas categorias
-INSERT INTO categorias (nome, descricao, ordem) VALUES
-('Pizzas Tradicionais', 'Pizzas com sabores clássicos e queridos por todos', 1),
-('Pizzas Especiais', 'Pizzas com combinações únicas e ingredientes selecionados', 2),
-('Pizzas Doces', 'Deliciosas pizzas com coberturas doces', 3),
-('Bebidas', 'Refrigerantes, sucos e outras bebidas', 4);
+INSERT INTO categorias (nome, descricao) VALUES
+('Pizzas Tradicionais', 'Pizzas com sabores clássicos e queridos por todos'),
+('Pizzas Especiais', 'Pizzas com combinações únicas e ingredientes selecionados'),
+('Pizzas Doces', 'Deliciosas pizzas com coberturas doces'),
+('Bebidas', 'Refrigerantes, sucos e outras bebidas');
 
 -- Inserir alguns produtos
 INSERT INTO produtos (categoria_id, nome, descricao, preco, ordem) VALUES

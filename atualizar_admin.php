@@ -1,5 +1,6 @@
 <?php
 require_once 'includes/config.php';
+require_once 'includes/functions.php';
 
 try {
     $pdo = conectarDB();
@@ -7,12 +8,12 @@ try {
     // Nova senha: admin123
     $nova_senha = gerarHash('admin123');
     
-    // Atualizar a senha do admin
-    $stmt = $pdo->prepare("UPDATE usuarios SET senha = ? WHERE email = 'admin@minipizza.com'");
+    // Atualizar senha do admin
+    $stmt = $pdo->prepare("UPDATE usuarios SET senha = ? WHERE email = 'admin@pizzariaamatsu.com'");
     $stmt->execute([$nova_senha]);
     
-    echo "Senha do admin atualizada com sucesso!";
+    echo "Senha do administrador atualizada com sucesso!";
     
 } catch (PDOException $e) {
-    echo "Erro ao atualizar senha: " . $e->getMessage();
+    echo "Erro: " . $e->getMessage();
 } 

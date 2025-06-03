@@ -20,6 +20,11 @@
                 <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
+        <div class="footer-info">
+            <h3>Contato</h3>
+            <p>Telefone: (11) 99999-9999</p>
+            <p>Email: contato@pizzariaamatsu.com</p>
+        </div>
     </div>
     <div class="footer-bottom">
         <p>&copy; <?php echo date('Y'); ?> <?php echo SITE_NAME; ?>. Todos os direitos reservados.</p>

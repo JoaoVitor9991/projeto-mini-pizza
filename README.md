@@ -1,4 +1,4 @@
-# Mini Pizza - Sistema de Pedidos Online
+# Pizzaria do Amatsu - Sistema de Pedidos Online
 
 Sistema web para gerenciamento de pedidos de uma pizzaria, desenvolvido em PHP com MySQL.
 
@@ -72,13 +72,13 @@ define('DB_PASS', '');
 ```
 
 5. Acesse o sistema:
-- Frontend: http://localhost/projeto-mini-pizza
-- Área Administrativa: http://localhost/projeto-mini-pizza/admin
+- Frontend: http://localhost/pizzaria-amatsu
+- Área Administrativa: http://localhost/pizzaria-amatsu/admin
 
 ## Estrutura do Projeto
 
 ```
-projeto-mini-pizza/
+pizzaria-amatsu/
 ├── admin/              # Área administrativa
 ├── assets/
 │   ├── css/           # Arquivos de estilo

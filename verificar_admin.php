@@ -5,29 +5,30 @@ try {
     $pdo = conectarDB();
     
     // Verificar se o admin existe
-    $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = 'admin@minipizza.com'");
+    $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = 'admin@pizzariaamatsu.com'");
     $stmt->execute();
-    $admin = $stmt->fetch(PDO::FETCH_ASSOC);
     
-    // Nova senha: admin123
-    $nova_senha = gerarHash('admin123');
-    
-    if ($admin) {
-        // Atualizar senha do admin existente
-        $stmt = $pdo->prepare("UPDATE usuarios SET senha = ? WHERE email = 'admin@minipizza.com'");
-        $stmt->execute([$nova_senha]);
-        echo "Senha do administrador foi atualizada com sucesso!<br>";
+    if ($stmt->rowCount() === 0) {
+        // Criar senha aleatória
+        $nova_senha = bin2hex(random_bytes(8));
+        $senha_hash = password_hash($nova_senha, PASSWORD_DEFAULT);
+        
+        // Criar admin
+        $stmt = $pdo->prepare("UPDATE usuarios SET senha = ? WHERE email = 'admin@pizzariaamatsu.com'");
+        $stmt->execute([$senha_hash]);
+        
+        if ($stmt->rowCount() === 0) {
+            // Inserir novo admin
+            $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, senha, tipo) VALUES (?, ?, ?, ?)");
+            $stmt->execute(['Administrador', 'admin@pizzariaamatsu.com', $senha_hash, 'admin']);
+        }
+        
+        echo "Admin criado com sucesso!<br>";
+        echo "Email: admin@pizzariaamatsu.com<br>";
+        echo "Senha: " . $nova_senha;
     } else {
-        // Criar novo usuário admin
-        $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, senha, tipo) VALUES (?, ?, ?, ?)");
-        $stmt->execute(['Administrador', 'admin@minipizza.com', $nova_senha, 'admin']);
-        echo "Usuário administrador foi criado com sucesso!<br>";
+        echo "Admin já existe.";
     }
-    
-    echo "<br>Agora você pode fazer login com:<br>";
-    echo "Email: admin@minipizza.com<br>";
-    echo "Senha: admin123<br>";
-    echo "<br><a href='login.php'>Ir para a página de login</a>";
     
 } catch (PDOException $e) {
     echo "Erro: " . $e->getMessage();

@@ -1,5 +1,9 @@
 // Função para adicionar produto ao carrinho
 function adicionarAoCarrinho(produtoId, quantidade = 1) {
+    // Adicionar efeito visual ao botão
+    const botao = event.target.closest('.btn-adicionar');
+    botao.classList.add('adicionando');
+    
     fetch('includes/adicionar_carrinho.php', {
         method: 'POST',
         headers: {
@@ -31,17 +35,68 @@ function adicionarAoCarrinho(produtoId, quantidade = 1) {
                 }
             }
             
-            // Mostrar mensagem de sucesso
-            mostrarMensagem('Produto adicionado ao carrinho!', 'success');
+            // Criar e mostrar o mini-carrinho
+            const produtoCard = botao.closest('.produto-card');
+            const produtoNome = produtoCard.querySelector('h3').textContent;
+            const produtoPreco = produtoCard.querySelector('.produto-preco').textContent;
+            
+            mostrarMiniCarrinho(produtoNome, produtoPreco);
+            
+            // Remover classe de animação após 1 segundo
+            setTimeout(() => {
+                botao.classList.remove('adicionando');
+            }, 1000);
             
         } else {
             mostrarMensagem(data.mensagem || 'Erro ao adicionar produto ao carrinho', 'error');
+            botao.classList.remove('adicionando');
         }
     })
     .catch(error => {
         console.error('Erro:', error);
         mostrarMensagem('Erro ao adicionar produto ao carrinho', 'error');
+        botao.classList.remove('adicionando');
     });
+}
+
+// Função para mostrar o mini-carrinho
+function mostrarMiniCarrinho(nome, preco) {
+    // Remover mini-carrinho anterior se existir
+    const miniCarrinhoAntigo = document.querySelector('.mini-carrinho');
+    if (miniCarrinhoAntigo) {
+        miniCarrinhoAntigo.remove();
+    }
+    
+    // Criar o mini-carrinho
+    const miniCarrinho = document.createElement('div');
+    miniCarrinho.className = 'mini-carrinho';
+    miniCarrinho.innerHTML = `
+        <div class="mini-carrinho-conteudo">
+            <i class="fas fa-check-circle"></i>
+            <div class="mini-carrinho-texto">
+                <p>Item adicionado ao carrinho!</p>
+                <p class="mini-carrinho-item">${nome}</p>
+                <p class="mini-carrinho-preco">${preco}</p>
+            </div>
+            <a href="carrinho.php" class="btn-ver-carrinho">Ver Carrinho</a>
+        </div>
+    `;
+    
+    // Adicionar ao corpo do documento
+    document.body.appendChild(miniCarrinho);
+    
+    // Adicionar classe para animar a entrada
+    setTimeout(() => {
+        miniCarrinho.classList.add('mostrar');
+    }, 100);
+    
+    // Remover após 5 segundos
+    setTimeout(() => {
+        miniCarrinho.classList.remove('mostrar');
+        setTimeout(() => {
+            miniCarrinho.remove();
+        }, 300);
+    }, 5000);
 }
 
 // Função para mostrar mensagens

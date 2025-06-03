@@ -7,7 +7,7 @@ define('DB_NAME', 'mini_pizza');
 
 // Configurações gerais
 define('SITE_URL', 'http://localhost/projeto-mini-pizza');
-define('SITE_NAME', 'Mini Pizza');
+define('SITE_NAME', 'Pizzaria do Amatsu');
 
 // Configurações de sessão
 session_start();

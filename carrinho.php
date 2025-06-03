@@ -47,7 +47,7 @@ if (isset($_SESSION['carrinho'])) {
     }
 }
 
-// Taxa de entrega fixa (você pode modificar isso conforme sua necessidade)
+// Taxa de entrega fixa
 $taxa_entrega = 5.00;
 $total = $subtotal + $taxa_entrega;
 ?>
@@ -81,6 +81,12 @@ $total = $subtotal + $taxa_entrega;
                     <div class="carrinho-produtos">
                         <?php foreach ($_SESSION['carrinho'] as $item): ?>
                             <div class="carrinho-item">
+                                <?php if (!empty($item['imagem'])): ?>
+                                    <img src="assets/img/<?php echo htmlspecialchars($item['imagem']); ?>" 
+                                         alt="<?php echo htmlspecialchars($item['nome']); ?>"
+                                         class="item-imagem">
+                                <?php endif; ?>
+                                
                                 <div class="item-info">
                                     <h3><?php echo htmlspecialchars($item['nome']); ?></h3>
                                     <p class="item-preco">R$ <?php echo number_format($item['preco'], 2, ',', '.'); ?></p>
@@ -100,7 +106,7 @@ $total = $subtotal + $taxa_entrega;
                                     <form method="POST" class="form-remover">
                                         <input type="hidden" name="produto_id" value="<?php echo $item['id']; ?>">
                                         <input type="hidden" name="acao" value="remover">
-                                        <button type="submit" class="btn-remover">
+                                        <button type="submit" class="btn-remover" title="Remover item">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
@@ -130,11 +136,11 @@ $total = $subtotal + $taxa_entrega;
                         </div>
                         
                         <a href="finalizar-pedido.php" class="btn-finalizar">
-                            Finalizar Pedido
+                            <i class="fas fa-check-circle"></i> Finalizar Pedido
                         </a>
                         
                         <a href="index.php" class="btn-continuar">
-                            Continuar Comprando
+                            <i class="fas fa-arrow-left"></i> Continuar Comprando
                         </a>
                     </div>
                 </div>

@@ -19,4 +19,7 @@
             <?php endif; ?>
         </ul>
     </nav>
-</header> 
+</header>
+
+<!-- Carrinho Flutuante -->
+<?php include 'includes/carrinho_flutuante.php'; ?> 

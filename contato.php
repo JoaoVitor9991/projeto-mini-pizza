@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <i class="fas fa-envelope"></i>
                         <div>
                             <h3>Email</h3>
-                            <p>contato@minipizza.com</p>
+                            <p>contato@pizzariaamatsu.com</p>
                         </div>
                     </div>
 
